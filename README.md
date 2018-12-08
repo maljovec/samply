@@ -3,7 +3,7 @@ A Collection of Space-filling Sampling Designs for Arbitrary Dimensions.
 
 CVT C++ code is adapted from a library provided by Carlos Correa.
 
-NOTE: This code is experimental, poorly designed, does not follow any best practices, minimally tested, and ill-documented, use at your own risk!
+:warning: **NOTE**: This code is experimental, poorly designed, does not follow any best practices, minimally tested, and ill-documented. **Use at your own risk!** :warning: 
 
 # Prerequisites
 
