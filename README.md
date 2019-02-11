@@ -1,31 +1,41 @@
 # samplers
 A Collection of Space-filling Sampling Designs for Arbitrary Dimensions.
 
-CVT C++ code is adapted from a library provided by Carlos Correa.
+Including:
+ * Uniform sampling of a n-dimensional ball
+ * Uniform sampling of the directions on an n-dimensional sphere
+ * Sampling the Grassmannian Atlas
+ * An approximate Centroidal Voronoi Tessellation using Lloyd's Algorithm
 
-:warning: **NOTE**: This code is experimental, poorly designed, does not follow any best practices, minimally tested, and ill-documented. **Use at your own risk!** :warning: 
+Forthcoming:
+ * A unified interface for Latin Hypercube sampling from PyDOE
+ * A unified interface for Generalized Halton sequence sampling from ghalton
+ * Spherical CVT sampling for performing CVT constrained to the surface of a
+   sphere.
+ * A test suite to verify results in low to moderate dimensionality
+
+The python CVT code is adapted from a C++ implementation provided by
+Carlos Correa. The Grassmannian sampler is adapted from code from Shusen
+Liu.
+
+:warning: **NOTE**: This code is experimental, minimally tested, and
+ill-documented. **Use at your own risk!** :warning:
 
 # Prerequisites
 
- * [ANN](https://www.cs.umd.edu/~mount/ANN/)
  * [ghalton](https://github.com/fmder/ghalton)
  * [pyDOE](https://pythonhosted.org/pyDOE/)
- 
- On Ubuntu:
+
+You can install these using the follow pip command:
+
  ```bash
- apt install libann-dev
  pip install ghalton pyDOE
  ```
- YMMV on other OSes.
- 
+
 # Installation
 
 ```bash
 git clone https://github.com/maljovec/samplers.git
 cd samplers
-pushd samplers/cvt
-make
-popd
-# Only tested develop, I'm not sure if install will work because I make no effort to move the createCVT executable.
 python setup.py [build|develop|install]
 ```
