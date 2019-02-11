@@ -13,6 +13,7 @@ Forthcoming:
  * Spherical CVT sampling for performing CVT constrained to the surface of a
    sphere.
  * A test suite to verify results in low to moderate dimensionality
+ * Improved code documentation
 
 The python CVT code is adapted from a C++ implementation provided by
 Carlos Correa. The Grassmannian sampler is adapted from code from Shusen
