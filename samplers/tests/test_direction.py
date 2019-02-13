@@ -16,6 +16,16 @@ class TestDirectionalSampler(unittest.TestCase):
         """
         pass
 
+    def test_1D(self):
+        """
+        """
+        sampler = samplers.DirectionalSampler(1)
+        samples = sampler.generate_samples(10000)
+        msg = "There should only be 2 samples available for the 1D case."
+        self.assertEqual(len(samples), 2, msg)
+        self.assertEqual(samples[0, 0], -1)
+        self.assertEqual(samples[1, 0], 1)
+
     def test_2D(self):
         """
         """
