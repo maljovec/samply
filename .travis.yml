@@ -9,7 +9,7 @@ python:
   # - "3.4"
   - "3.5"
   - "3.6"
-  - "3.7"
+  # - "3.7"
   # - "nightly"
   # PyPy versions commented out since scipy does not play well with pypy
   # - "pypy2.7"
