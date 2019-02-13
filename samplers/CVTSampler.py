@@ -17,6 +17,7 @@ class CVTSampler(object):
         max_iterations=1000000,
         epsilon=1e-6,
         verbose=False,
+        update_size=10000,
     ):
         np.random.seed(seed)
         points = np.random.uniform(0, 1, size=(count, dimensionality))
@@ -28,22 +29,28 @@ class CVTSampler(object):
         maxErrorId = -1
         maxError = 0.0
 
+        query_points = np.random.uniform(
+            0, 1, size=(update_size, dimensionality)
+        )
+        sites = nn.kneighbors(query_points, return_distance=False)
+
         for i in range(max_iterations):
-            if verbose and i % 10000 == 0:
+            if verbose and i % update_size == 0 and i > 0:
                 print("Iter {} err = {}".format(i, np.sqrt(maxError)))
 
-            p = np.random.uniform(0, 1, size=(1, dimensionality))
+            p = query_points[i % update_size]
+            closest = sites[i % update_size]
 
-            # find closest
-            closest = nn.kneighbors(p, return_distance=False)[0]
-
-            sumdiff = 0
             px = np.array(points[closest])
             points[closest] = (ji[closest] * px + p) / (ji[closest] + 1)
             sumdiff = np.sum(px - points[closest]) ** 2
 
-            if i % 10000 == 0:
+            if i % update_size == 0:
                 nn.fit(points)
+                query_points = np.random.uniform(
+                    0, 1, size=(update_size, dimensionality)
+                )
+                sites = nn.kneighbors(query_points, return_distance=False)
 
             ji[closest] = ji[closest] + 1
 
@@ -70,7 +77,7 @@ class CVTSampler(object):
         if verbose:
             nn = neighbors.NearestNeighbors(n_neighbors=2)
             nn.fit(points)
-            distances, indices = nn.kneighbors(points, return_distance=True)
+            distances, _ = nn.kneighbors(points, return_distance=True)
             maximinDist = np.max(distances[:, 1])
 
             print("maximin distance = {}".format(maximinDist))
