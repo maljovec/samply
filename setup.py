@@ -54,7 +54,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
-    setup_requires=["scipy", "numpy"],
-    install_requires=["scipy", "numpy"],
+    setup_requires=["scipy", "numpy", "sklearn"],
+    install_requires=["scipy", "numpy", "sklearn"],
     python_requires=">=2.7, <4",
 )
