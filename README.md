@@ -5,13 +5,14 @@ Including:
  * Uniform sampling of a n-dimensional ball
  * Uniform sampling of the directions on an n-dimensional sphere
  * Sampling the Grassmannian Atlas
- * An approximate Centroidal Voronoi Tessellation using Lloyd's Algorithm
+ * An approximate Centroidal Voronoi Tessellation using a Probabilistic
+   Lloyd's Algorithm
+ * An approximate Constrained Centroidal Voronoi Tessellation on an
+   n-sphere
 
 Forthcoming:
  * A unified interface for Latin Hypercube sampling from PyDOE
  * A unified interface for Generalized Halton sequence sampling from ghalton
- * Spherical CVT sampling for performing CVT constrained to the surface of a
-   sphere.
  * A test suite to verify results in low to moderate dimensionality
  * Improved code documentation
 
@@ -39,4 +40,12 @@ You can install these using the follow pip command:
 git clone https://github.com/maljovec/samplers.git
 cd samplers
 python setup.py [build|develop|install]
+```
+
+# Testing
+
+The test suite can be run through the setup script:
+
+```bash
+python setup.py test
 ```

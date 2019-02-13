@@ -1,0 +1,23 @@
+language: python
+# scipy and numpy should be handled in the setup file, but setup does
+# not seem to respect order on some versions of python
+install: make && pip install coveralls
+python:
+  - "2.7"
+  # - "3.2" # see https://github.com/travis-ci/travis-ci/issues/4866
+  # - "3.3"
+  # - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  # - "nightly"
+  # PyPy versions commented out since scipy does not play well with pypy
+  # - "pypy2.7"
+  # - "pypy3.5"
+# command to install dependencies
+script: coverage run --source samplers setup.py test
+after_success:
+  - coveralls
+branches:
+  only:
+  - master
