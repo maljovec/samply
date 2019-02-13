@@ -30,7 +30,7 @@ class TestDirectionalSampler(unittest.TestCase):
         thetas /= 2*math.pi
         thetas += 0.5
         p = kstest(thetas, uniform.cdf)[1]
-        msg = "The ditribution of angles is not representative of a uniform distribution (p={})".format(p)
+        msg = "The angles are not representative of a uniform distribution (p={})".format(p)
         self.assertGreaterEqual(p, 0.05, msg)
 
 
