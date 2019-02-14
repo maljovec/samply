@@ -19,6 +19,7 @@ class TestBallSampler(unittest.TestCase):
         """
         """
         ball_sampler = samply.BallSampler(2)
+        np.random.seed(0)
         samples = ball_sampler.generate_samples(10000)
         norms = np.linalg.norm(samples, axis=1)
         msg = "At least one sample lies outside of the unit ball"
