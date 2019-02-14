@@ -15,7 +15,7 @@ python:
   # - "pypy2.7"
   # - "pypy3.5"
 # command to install dependencies
-script: coverage run --source samplers setup.py test
+script: coverage run --source samply setup.py test
 after_success:
   - coveralls
 branches:

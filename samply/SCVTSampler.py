@@ -1,6 +1,6 @@
 from sklearn import neighbors
 import numpy as np
-from samplers.DirectionalSampler import DirectionalSampler
+from samply.DirectionalSampler import DirectionalSampler
 
 
 class SCVTSampler(object):

@@ -1,7 +1,7 @@
-""" This module will test the functionality of samplers.SCVTSampler
+""" This module will test the functionality of samply.SCVTSampler
 """
 import unittest
-import samplers
+import samply
 from sklearn import neighbors
 import numpy as np
 
@@ -22,13 +22,13 @@ class TestSCVTSampler(unittest.TestCase):
         n_samples = 20
         n_validation = 100000
         D = 2
-        points = samplers.SCVTSampler.generate_samples(
+        points = samply.SCVTSampler.generate_samples(
             n_samples, D, verbose=True
         )
         deltas = np.fabs(np.linalg.norm(points, axis=1) - 1)
         msg = "A generated point does not lie on the sphere"
         self.assertLessEqual(np.max(deltas), 1e-6, msg)
-        sampler = samplers.BallSampler(D)
+        sampler = samply.BallSampler(D)
         query_points = sampler.generate_samples(n_validation)
 
         nn = neighbors.NearestNeighbors(n_neighbors=1)

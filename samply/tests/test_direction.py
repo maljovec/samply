@@ -1,7 +1,7 @@
-""" This module will test the functionality of samplers.DirectionalSampler
+""" This module will test the functionality of samply.DirectionalSampler
 """
 import unittest
-import samplers
+import samply
 from scipy.stats import kstest, uniform
 import numpy as np
 import math
@@ -19,7 +19,7 @@ class TestDirectionalSampler(unittest.TestCase):
     def test_1D(self):
         """
         """
-        sampler = samplers.DirectionalSampler(1)
+        sampler = samply.DirectionalSampler(1)
         samples = sampler.generate_samples(10000)
         msg = "There should only be 2 samples available for the 1D case."
         self.assertEqual(len(samples), 2, msg)
@@ -29,7 +29,7 @@ class TestDirectionalSampler(unittest.TestCase):
     def test_2D(self):
         """
         """
-        sampler = samplers.DirectionalSampler(2)
+        sampler = samply.DirectionalSampler(2)
         samples = sampler.generate_samples(10000)
         norms = np.linalg.norm(samples, axis=1)
         deltas = np.fabs(norms - 1.)

@@ -1,7 +1,7 @@
-""" This module will test the functionality of samplers.CVTSampler
+""" This module will test the functionality of samply.CVTSampler
 """
 import unittest
-import samplers
+import samply
 from sklearn import neighbors
 import numpy as np
 
@@ -38,7 +38,7 @@ class TestCVTSampler(unittest.TestCase):
         )
 
     def n_dimension_grid_validation(self, n_samples, n_validation, D):
-        points = samplers.CVTSampler.generate_samples(n_samples, D)
+        points = samply.CVTSampler.generate_samples(n_samples, D)
         n_grid_validation = int(np.ceil(n_validation ** (1. / D)))
         xi = np.linspace(0, 1, n_grid_validation)
         x = []
@@ -50,7 +50,7 @@ class TestCVTSampler(unittest.TestCase):
         self.n_dimension_validation(points, query_points)
 
     def n_dimension_mc_validation(self, n_samples, n_validation, D):
-        points = samplers.CVTSampler.generate_samples(n_samples, D)
+        points = samply.CVTSampler.generate_samples(n_samples, D)
         query_points = np.random.uniform(0, 1, (n_validation, D))
         self.n_dimension_validation(points, query_points)
 
@@ -58,7 +58,7 @@ class TestCVTSampler(unittest.TestCase):
         """
         """
         self.setup()
-        points = samplers.CVTSampler.generate_samples(10, 2, verbose=True)
+        points = samply.CVTSampler.generate_samples(10, 2, verbose=True)
         query_points = np.random.uniform(0, 1, (1000000, 2))
         self.n_dimension_validation(points, query_points)
 

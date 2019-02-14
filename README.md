@@ -1,4 +1,4 @@
-# samplers
+# Samply
 A Collection of Space-filling Sampling Designs for Arbitrary Dimensions.
 
 Including:
@@ -37,8 +37,8 @@ You can install these using the follow pip command:
 # Installation
 
 ```bash
-git clone https://github.com/maljovec/samplers.git
-cd samplers
+git clone https://github.com/maljovec/samply.git
+cd samply
 python setup.py [build|develop|install]
 ```
 

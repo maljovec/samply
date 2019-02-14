@@ -1,7 +1,7 @@
-""" This module will test the functionality of samplers.BallSampler
+""" This module will test the functionality of samply.BallSampler
 """
 import unittest
-import samplers
+import samply
 from scipy.stats import kstest, uniform
 import numpy as np
 import math
@@ -18,7 +18,7 @@ class TestBallSampler(unittest.TestCase):
     def test_2D(self):
         """
         """
-        ball_sampler = samplers.BallSampler(2)
+        ball_sampler = samply.BallSampler(2)
         samples = ball_sampler.generate_samples(10000)
         norms = np.linalg.norm(samples, axis=1)
         msg = "At least one sample lies outside of the unit ball"

@@ -1,5 +1,5 @@
 """
-      Setup script for samplers
+      Setup script for samply
 """
 from setuptools import setup
 import re
@@ -24,21 +24,21 @@ def get_property(prop, project):
     return result.group(1)
 
 
-VERSION = get_property("__version__", "samplers")
+VERSION = get_property("__version__", "samply")
 
 # Consult here: https://packaging.python.org/tutorials/distributing-packages/
 setup(
-    name="samplers",
-    packages=["samplers"],
+    name="samply",
+    packages=["samply"],
     version=VERSION,
     description="A library for computing samplings in arbitrary dimensions",
     long_description="TODO",
     author="Dan Maljovec",
     author_email="maljovec002@gmail.com",
     license="BSD",
-    test_suite="samplers.tests",
-    url="https://github.com/maljovec/samplers",
-    download_url="https://github.com/maljovec/samplers/archive/"
+    test_suite="samply.tests",
+    url="https://github.com/maljovec/samply",
+    download_url="https://github.com/maljovec/samply/archive/"
     + VERSION
     + ".tar.gz",
     keywords=[
