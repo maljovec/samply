@@ -1,5 +1,4 @@
 import numpy as np
-import scipy
 
 
 def nullspace(A, atol=1e-13, rtol=0):
@@ -36,10 +35,3 @@ def nullspace(A, atol=1e-13, rtol=0):
     nnz = (s >= tol).sum()
     ns = vh[nnz:].conj().T
     return ns
-
-
-def null(A, eps=1e-15):
-    u, s, vh = scipy.linalg.svd(A)
-    null_mask = (s <= eps)
-    null_space = scipy.compress(null_mask, vh, axis=0)
-    return scipy.transpose(null_space)
