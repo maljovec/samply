@@ -15,6 +15,9 @@ class TestNullspace(unittest.TestCase):
         pass
 
     def test_nullspace(self):
+        """
+        """
+        self.setup()
         A = np.array([[1,0,0],[0,1,0]])
         ns = samply.nullspace(A)
         zero = np.max(np.fabs(np.dot(A, ns)))
