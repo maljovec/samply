@@ -1,5 +1,5 @@
 =====
-nglpy
+samply
 =====
 
 .. badges
@@ -79,19 +79,21 @@ Usage
 
 Then you can use the library from python such as the example below::
 
-    import nglpy
-    import numpy as np
+    import samply
+    
+    sampler = samply.DirectionalSampler(2)
+    direction_samples = sampler.generate_samples(10000)
+    
+    sampler = samply.BallSampler(2)
+    ball_samples = sampler.generate_samples(10000)
 
-    point_set = np.random.rand(100,2)
-    max_neighbors = 9
-    beta = 1
+    sampler = samply.BallSampler(2)
+    ball_samples = sampler.generate_samples(10000)
 
-    # TODO: Make this an enum, remove hard-coding
-    graph_type = 'beta skeleton'
-
-    aGraph = nglpy.Graph(point_set, graph_type, max_neighbors, beta)
-
-    aGraph.neighbors()
+    sampler = samply.GrassmannianSampler(3, 2)
+    projection_samples = sampler.generate_samples(10)
+    
+    cvt_samples = samply.CVTSampler.generate_samples(10, 2)
 
 .. end-usage
 
