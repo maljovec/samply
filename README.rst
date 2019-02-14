@@ -24,7 +24,7 @@ samply
 
 .. logo
 
-.. image:: docs/_static/samplers.svg
+.. image:: docs/_static/samply.svg
     :align: center
     :alt: samplers
 
@@ -80,10 +80,10 @@ Usage
 Then you can use the library from python such as the example below::
 
     import samply
-    
+
     sampler = samply.DirectionalSampler(2)
     direction_samples = sampler.generate_samples(10000)
-    
+
     sampler = samply.BallSampler(2)
     ball_samples = sampler.generate_samples(10000)
 
@@ -92,7 +92,7 @@ Then you can use the library from python such as the example below::
 
     sampler = samply.GrassmannianSampler(3, 2)
     projection_samples = sampler.generate_samples(10)
-    
+
     cvt_samples = samply.CVTSampler.generate_samples(10, 2)
 
 .. end-usage
