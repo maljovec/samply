@@ -64,11 +64,11 @@ Liu.
 Installation
 ============
 
-A preliminary version is available on PyPI:
+A preliminary version is available on PyPI::
 
     pip install samply
 
-Otherwise, you can download the repository for the most cutting edge additions:
+Otherwise, you can download the repository for the most cutting edge additions::
 
     git clone https://github.com/maljovec/samplers.git
     cd samplers
@@ -107,7 +107,7 @@ Then you can use the library from python such as the example below::
 Testing
 =====
 
-The test suite can be run through the setup script:
+The test suite can be run through the setup script::
 
     python setup.py test
 
