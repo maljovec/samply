@@ -63,8 +63,8 @@ class TestSubspaceSampler(unittest.TestCase):
         self.assertEqual(zero[0], 0, msg)
         msg = "There are only 2 directions orthogonal to (0,1)"
         self.assertEqual(len(samples), 2, msg)
-        self.assertEqual(samples[0, 0], -1)
-        self.assertEqual(samples[1, 0], 1)
+        self.assertEqual(samples[0, 0], 1)
+        self.assertEqual(samples[1, 0], -1)
 
 
 if __name__ == "__main__":
