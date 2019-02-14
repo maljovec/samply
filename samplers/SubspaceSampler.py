@@ -3,19 +3,6 @@ from .DirectionalSampler import DirectionalSampler
 from .BallSampler import BallSampler
 
 
-def gram_schmidt(vectors):
-    """
-        Do not use, this is numerically less stable than the
-        'orthogonalize' method.
-    """
-    basis = []
-    for v in vectors:
-        w = v - np.sum(np.dot(v, b)*b for b in basis)
-        if (w > 1e-10).any():
-            basis.append(w/np.linalg.norm(w))
-    return np.array(basis)
-
-
 def orthogonalize(vectors):
     """
         This is a more stable version of the gram_schmidt function that
