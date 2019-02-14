@@ -21,9 +21,10 @@ class TestGrassmannianSampler(unittest.TestCase):
         samples = sampler.generate_samples(10)
 
         for basis in samples:
-            zero = math.fabs(basis[:,0] @ basis[:, 1])
+            zero = math.fabs(basis[:, 0].dot(basis[:, 1]))
             msg = "Basis is not orthogonal"
             self.assertLessEqual(zero, 1e-15, msg)
+
 
 if __name__ == "__main__":
     unittest.main()
