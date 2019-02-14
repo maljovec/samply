@@ -64,7 +64,11 @@ Liu.
 Installation
 ============
 
-::
+A preliminary version is available on PyPI:
+
+    pip install samply
+
+Otherwise, you can download the repository for the most cutting edge additions:
 
     git clone https://github.com/maljovec/samplers.git
     cd samplers
