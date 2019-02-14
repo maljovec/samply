@@ -121,7 +121,6 @@ What's Next
 Forthcoming:
  * A unified interface for Latin Hypercube sampling from PyDOE
  * A unified interface for Generalized Halton sequence sampling from ghalton
- * A test suite to verify results in low to moderate dimensionality
  * Improved code documentation
 
 .. end-todo
