@@ -123,6 +123,6 @@ What's Next
 Forthcoming:
  * A unified interface for Latin Hypercube sampling from PyDOE
  * A unified interface for Generalized Halton sequence sampling from ghalton
- * Improved code documentation
+ * Improved documentation and a more uniform API
 
 .. end-todo
