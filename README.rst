@@ -81,7 +81,7 @@ Otherwise, you can download the repository for the most cutting edge additions::
 Usage
 =====
 
-Then you can use the library from python such as the example below::
+You can use the library from python such as the examples below::
 
     import samply
 
@@ -91,13 +91,15 @@ Then you can use the library from python such as the example below::
     sampler = samply.BallSampler(2)
     ball_samples = sampler.generate_samples(10000)
 
-    sampler = samply.BallSampler(2)
-    ball_samples = sampler.generate_samples(10000)
+    sampler = samply.DirectionalSampler(2)
+    directional_samples = sampler.generate_samples(10000)
 
     sampler = samply.GrassmannianSampler(3, 2)
     projection_samples = sampler.generate_samples(10)
 
     cvt_samples = samply.CVTSampler.generate_samples(10, 2)
+
+The ``*samples`` variables will be NxD matrices where N is the number of samples requested and D is the dimensionality of the sampler or the requested dimensionality.
 
 .. end-usage
 
