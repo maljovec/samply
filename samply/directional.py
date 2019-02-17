@@ -1,28 +1,30 @@
-from sklearn import neighbors
 import numpy as np
-from samply.DirectionalSampler import DirectionalSampler
 
 
-class SCVTSampler(object):
-    """
-        A class for performing Spherical Centroidal Voronoi Tessellation
-        sampling in arbitrary dimension.
-    """
+def uniform(count=1, dimensionality=2):
+    if dimensionality == 1:
+        return np.array([[-1], [1]])
 
-    @classmethod
+    samples = np.zeros((count, dimensionality))
+    for i in range(count):
+        X = np.random.normal(0, 1, dimensionality)
+        X /= np.linalg.norm(X)
+        samples[i, :] = X
+
+    return samples
+
+
+def cvt(count=1, dimensionality=2):
     def generate_samples(
         self,
         count=1,
         dimensionality=2,
-        seed=0,
         max_iterations=1000000,
         epsilon=1e-6,
         verbose=False,
         update_size=10000,
     ):
-        np.random.seed(seed)
-        sampler = DirectionalSampler(dimensionality)
-        points = sampler.generate_samples(count)
+        points = uniform(count, dimensionality)
         nn = neighbors.NearestNeighbors(n_neighbors=1)
         nn.fit(points)
 
@@ -31,7 +33,7 @@ class SCVTSampler(object):
         maxErrorId = -1
         maxError = 0.0
 
-        query_points = sampler.generate_samples(update_size)
+        query_points = uniform(count, dimensionality)
         sites = nn.kneighbors(query_points, return_distance=False)
 
         for i in range(max_iterations):
