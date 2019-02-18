@@ -18,7 +18,7 @@ class TestHypercubeSampler(unittest.TestCase):
         self.tolerance = 1e-1
 
     def n_dimension_cvt_validation(self, n_samples, n_validation, D):
-        points = samply.hypercube.cvt(n_samples, D, verbose=True)
+        points = samply.hypercube.cvt(n_samples, D, verbose=False)
         query_points = samply.hypercube.uniform(n_validation, D)
         nn = neighbors.NearestNeighbors(n_neighbors=1)
         nn.fit(points)
@@ -40,6 +40,13 @@ class TestHypercubeSampler(unittest.TestCase):
             "Error ({}) exceeds tolerance {}".format(max_error, self.tolerance),
         )
 
+    def test_cvt_verbosity(self):
+        """
+        """
+        samples = samply.hypercube.cvt(10, 2, verbose=False)
+        self.assertEqual(10, samples.shape[0])
+        self.assertEqual(2, samples.shape[1])
+
     def test_2D_cvt_small(self):
         """
         """
@@ -47,6 +54,67 @@ class TestHypercubeSampler(unittest.TestCase):
         np.random.seed(0)
         self.n_dimension_cvt_validation(10, 100000, 2)
 
+    def test_2D_cvt_moderate(self):
+        """
+        """
+        self.setup()
+        np.random.seed(0)
+        self.n_dimension_cvt_validation(1000, 100000, 2)
+
+    def test_3D_cvt_moderate(self):
+        """
+        """
+        self.setup()
+        np.random.seed(0)
+        self.n_dimension_cvt_validation(1000, 100000, 3)
+
+    def test_lhs(self):
+        """
+        """
+        self.setup()
+        np.random.seed(0)
+        samples = samply.hypercube.lhs(10, 2)
+        self.assertEqual(10, samples.shape[0])
+        self.assertEqual(2, samples.shape[1])
+        self.assertGreaterEqual(np.min(samples), 0)
+        self.assertLessEqual(np.max(samples), 1)
+
+    def test_halton(self):
+        """
+        """
+        self.setup()
+        np.random.seed(0)
+        samples = samply.hypercube.halton(10, 2)
+        self.assertEqual(10, samples.shape[0])
+        self.assertEqual(2, samples.shape[1])
+        self.assertGreaterEqual(np.min(samples), 0)
+        self.assertLessEqual(np.max(samples), 1)
+
+    def test_grid(self):
+        """
+        """
+        self.setup()
+        D = 2
+        N = 10 ** D
+        samples = samply.hypercube.grid(N, D)
+        self.assertEqual(N, samples.shape[0])
+        self.assertEqual(D, samples.shape[1])
+        for i in range(D):
+            self.assertEqual(samples[0, i], 0.)
+            self.assertEqual(samples[-1, i], 1.)
+        self.assertGreaterEqual(np.min(samples), 0)
+        self.assertLessEqual(np.max(samples), 1)
+
+    def test_multimodal(self):
+        """
+        """
+        self.setup()
+        np.random.seed(0)
+        samples = samply.hypercube.multimodal(10, 2)
+        self.assertEqual(10, samples.shape[0])
+        self.assertEqual(2, samples.shape[1])
+        self.assertGreaterEqual(np.min(samples), 0)
+        self.assertLessEqual(np.max(samples), 1)
 
 if __name__ == "__main__":
     unittest.main()

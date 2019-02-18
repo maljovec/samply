@@ -16,6 +16,14 @@ def grid(count=1, dimensionality=2):
     return np.vstack(map(np.ravel, temp)).T[:count]
 
 
+def normal(count=1, dimensionality=2):
+    return np.clip(
+        np.random.normal(loc=0.5, scale=0.15, size=(count, dimensionality)),
+        0,
+        1,
+    )
+
+
 def cvt(
     count=1,
     dimensionality=2,

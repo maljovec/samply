@@ -1,18 +1,11 @@
 import samply.directional
+import numpy as np
 
 # TODO: Decouple all of these shapes from the underlying uniform distribution.
 # For some of these, this means do a D-1 distribution of points and then
 # mapping it into these shapes. e.g., the S curve in 2D could be generated
 # from a CVT sampling in 1D and then adding the noise to make the manifold...
 # I don't think this is right or generalizable.
-
-def normal(count=1, dimensionality=2):
-    return np.clip(
-        np.random.normal(loc=0.5, scale=0.15, size=(count, dimensionality)),
-        0,
-        1,
-    )
-
 
 def shell(count=1, dimensionality=2):
     directions = samply.directional.uniform(count, dimensionality)
@@ -26,7 +19,7 @@ def concentric_shells(count=1, dimensionality=2, levels=2, gap_ratio=0.4):
     width = 1 / (levels * (gap_ratio + 1))
     gap = width * gap_ratio
     low = gap
-    r = np.zeros(size=(count, 1))
+    r = np.zeros((count, 1))
     for i in range(levels):
         high = low + width
         mask = np.where(a == i)[0]
