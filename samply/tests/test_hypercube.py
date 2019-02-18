@@ -41,7 +41,7 @@ class TestHypercubeSampler(unittest.TestCase):
     def test_cvt_verbosity(self):
         """
         """
-        samples = samply.hypercube.cvt(10, 2, verbose=False)
+        samples = samply.hypercube.cvt(10, 2, verbose=True)
         self.assertEqual(10, samples.shape[0])
         self.assertEqual(2, samples.shape[1])
 
