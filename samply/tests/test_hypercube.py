@@ -2,10 +2,8 @@
 """
 import unittest
 import samply
-from scipy.stats import kstest, uniform
 from sklearn import neighbors
 import numpy as np
-import math
 
 
 class TestHypercubeSampler(unittest.TestCase):
@@ -105,6 +103,24 @@ class TestHypercubeSampler(unittest.TestCase):
         self.assertGreaterEqual(np.min(samples), 0)
         self.assertLessEqual(np.max(samples), 1)
 
+    def test_normal(self):
+        """
+        """
+        self.setup()
+        N = 100000
+        D = 2
+        np.random.seed(0)
+        samples = samply.hypercube.normal(N, D)
+        self.assertEqual(N, samples.shape[0])
+        self.assertEqual(D, samples.shape[1])
+        self.assertGreaterEqual(np.min(samples), 0)
+        self.assertLessEqual(np.max(samples), 1)
+        means = np.fabs(np.mean(samples, axis=0) - 0.5)
+        stds = np.fabs(np.std(samples, axis=0) - 0.15)
+        for mu, sigma in zip(means, stds):
+            self.assertLessEqual(mu, 1e-3)
+            self.assertLessEqual(sigma, 1e-3)
+
     def test_multimodal(self):
         """
         """
@@ -115,6 +131,7 @@ class TestHypercubeSampler(unittest.TestCase):
         self.assertEqual(2, samples.shape[1])
         self.assertGreaterEqual(np.min(samples), 0)
         self.assertLessEqual(np.max(samples), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
