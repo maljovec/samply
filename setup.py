@@ -26,6 +26,7 @@ def get_property(prop, project):
 
 VERSION = get_property("__version__", "samply")
 
+
 def long_description():
     """ Reads the README.rst file and extracts the portion tagged between
         specific LONG_DESCRIPTION comment lines.
@@ -43,6 +44,7 @@ def long_description():
             if recording:
                 description += line
 
+
 # Consult here: https://packaging.python.org/tutorials/distributing-packages/
 setup(
     name="samply",
@@ -58,9 +60,7 @@ setup(
     download_url="https://github.com/maljovec/samply/archive/"
     + VERSION
     + ".tar.gz",
-    keywords=[
-        "",
-    ],
+    keywords=[""],
     # Consult here: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -71,7 +71,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
-    setup_requires=["scipy", "numpy", "sklearn"],
-    install_requires=["scipy", "numpy", "sklearn"],
+    setup_requires=["scipy", "numpy", "sklearn", "pyDOE", "ghalton"],
+    install_requires=["scipy", "numpy", "sklearn", "pyDOE", "ghalton"],
     python_requires=">=2.7, <4",
 )

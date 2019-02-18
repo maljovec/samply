@@ -43,7 +43,7 @@ def grassmannian(count=1, data_dimensionality=2, target_dimensionality=2):
     return samples
 
 
-def ball(vector, count=1):
+def orthogonal_ball(vector, count=1):
     """
     """
     dimensionality = len(vector)
@@ -73,7 +73,7 @@ def ball(vector, count=1):
     return samples
 
 
-def directional(vector, count=1):
+def orthogonal_directional(vector, count=1):
     """
     """
     dimensionality = len(vector)

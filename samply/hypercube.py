@@ -91,3 +91,47 @@ def lhs(count=1, dimensionality=2):
 def halton(count=1, dimensionality=2, seed=0):
     sequencer = ghalton.GeneralizedHalton(dimensionality, seed)
     return np.array(sequencer.get(count))
+
+
+# def distinct_mixture(count, dimensionality):
+#     a = np.random.choice(a=[0, 1, 2], size=count)
+#     cov = 0.00125 * np.eye(dimensionality)
+#     means = []
+#     means.append(0.25 * np.ones(dimensionality))
+#     means.append(0.5 * np.ones(dimensionality))
+#     means.append(0.75 * np.ones(dimensionality))
+#     covs = [0.00125 * np.eye(dimensionality)]*3
+
+#     # Set every other dimension to 0.25
+#     mean[1::2] = 0.25
+#     X[mask] = np.clip(
+#         np.random.multivariate_normal(mean, cov, size=len(mask)), 0, 1
+#     )
+#     return X
+
+
+def multimodal(count, dimensionality, means=None, covariances=None):
+    """
+    """
+    if means is None:
+        means = []
+        means.append(0.5 * np.ones(dimensionality))
+        means.append(2. / 3. * np.ones(dimensionality))
+        means.append(1. / 3. * np.ones(dimensionality))
+
+    if covariances is None:
+        covariances = []
+        covariances.append(0.0125 * np.eye(dimensionality))
+        covariances.append(0.001 * np.eye(dimensionality))
+        covariances.append(0.001 * np.eye(dimensionality))
+
+    X = np.zeros((count, dimensionality))
+    a = np.random.choice(a=range(len(means)), size=count)
+    for i in range(len(means)):
+        mean = means[i]
+        cov = covariances[i]
+        mask = np.where(a == i)[0]
+        X[mask] = np.clip(
+            np.random.multivariate_normal(mean, cov, size=len(mask)), 0, 1
+        )
+    return X

@@ -1,7 +1,12 @@
 import samply.directional
 
+# TODO: Decouple all of these shapes from the underlying uniform distribution.
+# For some of these, this means do a D-1 distribution of points and then
+# mapping it into these shapes. e.g., the S curve in 2D could be generated
+# from a CVT sampling in 1D and then adding the noise to make the manifold...
+# I don't think this is right or generalizable.
 
-def normal(self, count=1, dimensionality=2):
+def normal(count=1, dimensionality=2):
     return np.clip(
         np.random.normal(loc=0.5, scale=0.15, size=(count, dimensionality)),
         0,
@@ -79,44 +84,4 @@ def stripes(count=1, dimensionality=2):
     )
     y = np.clip(x + eps + b, 0, 1)
     X = np.hstack((x, y))
-    return X
-
-
-def distinct_mixture(count, dimensionality):
-    a = np.random.choice(a=[0, 1, 2], size=count)
-    cov = 0.00125 * np.eye(dimensionality)
-    mean = 0.25 * np.ones(dimensionality)
-    X = np.clip(np.random.multivariate_normal(mean, cov, size=count), 0, 1)
-    mask = np.where(a == 1)[0]
-    mean = 0.5 * np.ones(dimensionality)
-    X[mask] = np.clip(
-        np.random.multivariate_normal(mean, cov, size=len(mask)), 0, 1
-    )
-    mask = np.where(a == 2)[0]
-    mean = 0.75 * np.ones(dimensionality)
-    # Set every other dimension to 0.25
-    mean[1::2] = 0.25
-    X[mask] = np.clip(
-        np.random.multivariate_normal(mean, cov, size=len(mask)), 0, 1
-    )
-    return X
-
-
-def overlap_mixture(count, dimensionality):
-    a = np.random.choice(a=[0, 1, 2], size=count)
-    mean = 0.5 * np.ones(dimensionality)
-    cov = 0.0125 * np.eye(dimensionality)
-    X = np.clip(np.random.multivariate_normal(mean, cov, size=count), 0, 1)
-    mask = np.where(a == 1)[0]
-    mean = 2. / 3. * np.ones(dimensionality)
-    cov = 0.001 * np.eye(dimensionality)
-    X[mask] = np.clip(
-        np.random.multivariate_normal(mean, cov, size=len(mask)), 0, 1
-    )
-    mask = np.where(a == 2)[0]
-    mean = 1. / 3. * np.ones(dimensionality)
-    cov = 0.001 * np.eye(dimensionality)
-    X[mask] = np.clip(
-        np.random.multivariate_normal(mean, cov, size=len(mask)), 0, 1
-    )
     return X

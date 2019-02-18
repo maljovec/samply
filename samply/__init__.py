@@ -1,8 +1,8 @@
-import .ball
-import .directional
-import .hypercube
-import .shape
-import .subspace
+import samply.ball
+import samply.directional
+import samply.hypercube
+import samply.shape
+import samply.subspace
 from .nullspace import nullspace
 
 __all__ = ['ball',

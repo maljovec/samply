@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def uniform(self, count=1, dimensionality=2):
+def uniform(count=1, dimensionality=2):
     samples = np.zeros((count, dimensionality))
     for i in range(count):
         X = np.random.normal(0, 1, dimensionality + 2)

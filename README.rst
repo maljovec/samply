@@ -41,6 +41,34 @@ dimensional data from domains including:
 .. LONG_DESCRIPTION
 
 A Collection of Space-filling Sampling Designs for Arbitrary Dimensions.
+The API is structured such that the top level packages represent the shape
+of the domain you are interested in:
+
+ * ball - The n-dimensional solid unit ball
+ * directional - The space of unit length directions in n-dimensional space.
+   You can also consider this a sampling of the boundary of the n-dimensional
+   unit ball.
+ * hypercube - The n-dimensional solid unit hypercube :math:`x \\in [0,1]^n`.
+ * subspace - Sampling a n-1-dimensional subspace orthogonal to a unit vector
+   or sampling the Grassmanian Atlas of projections from a dimension n to a
+   lower dimension m.
+ * shape - a collection of (n-1)-manifold and non-manifold shapes embedded in
+   an n dimensional space. For now these must all be sampled using a uniform
+   distribution.
+
+Within each module is a list of ways to fill the space of the samples.
+Note, that not all of the methods listed below are applicable to the modules
+listed above. They include:
+
+ * Uniform - a random, uniform distribution of points (available for ball,
+   directional, hypercube, subspace, and shape)
+ * Normal - a Gaussian distribution of points (available for hypercube)
+ * Multimodal - a mixture of Gaussian distributions of points (available for hypercube)
+ * CVT - an approximate centroidal Voronoi tessellation of the points
+   constrained to the given space (available for hypercube and directional)
+ * LHS - a Latin hypercube sampling design of points constrained to the space
+   (available for hypercube)
+ *
 
 Including:
  * Uniform sampling of a n-dimensional ball

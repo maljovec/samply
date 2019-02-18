@@ -3,7 +3,7 @@
 import unittest
 import samply
 import numpy as np
-
+import math
 
 class TestSubspaceSampler(unittest.TestCase):
     """ Class for testing the Subspace sampler
@@ -18,25 +18,20 @@ class TestSubspaceSampler(unittest.TestCase):
         """
         """
         try:
-            sampler = samply.SubspaceSampler([1])
+            samply.subspace.orthogonal_ball([1], 1)
             self.assertEqual(True, False, "A ValueError should be raised.")
         except ValueError as err:
-            self.assertEqual(
-                "Could not construct valid subspace.", str(err))
+            self.assertEqual("Could not construct valid subspace.", str(err))
 
     def test_2D_x(self):
         """
         """
-        sampler = samply.SubspaceSampler([1, 0])
-        samples = sampler.generate_samples(1000)
+        samples = samply.subspace.orthogonal_ball([1, 0], 1000)
         zero = np.unique(samples[:, 0])
         msg = "Samples drawn orthogonal to x-axis should have x=0"
         self.assertEqual(zero[0], 0, msg)
-        samples = sampler.generate_ball_samples(10)
-        zero = np.unique(samples[:, 0])
-        msg = "Samples drawn orthogonal to x-axis should have x=0"
-        self.assertEqual(zero[0], 0, msg)
-        samples = sampler.generate_directional_samples(100)
+
+        samples = samply.subspace.orthogonal_directional([1, 0], 100)
         zero = np.unique(samples[:, 0])
         msg = "Samples drawn orthogonal to x-axis should have x=0"
         self.assertEqual(zero[0], 0, msg)
@@ -48,16 +43,7 @@ class TestSubspaceSampler(unittest.TestCase):
     def test_2D_y(self):
         """
         """
-        sampler = samply.SubspaceSampler([0, 1])
-        samples = sampler.generate_samples(1000)
-        zero = np.unique(samples[:, 1])
-        msg = "Samples drawn orthogonal to y-axis should have y=0"
-        self.assertEqual(zero[0], 0, msg)
-        samples = sampler.generate_ball_samples(10)
-        zero = np.unique(samples[:, 1])
-        msg = "Samples drawn orthogonal to y-axis should have y=0"
-        self.assertEqual(zero[0], 0, msg)
-        samples = sampler.generate_directional_samples(100)
+        samples = samply.subspace.orthogonal_directional([0, 1], 1000)
         zero = np.unique(samples[:, 1])
         msg = "Samples drawn orthogonal to y-axis should have y=0"
         self.assertEqual(zero[0], 0, msg)
@@ -65,6 +51,15 @@ class TestSubspaceSampler(unittest.TestCase):
         self.assertEqual(len(samples), 2, msg)
         self.assertEqual(samples[0, 0], 1)
         self.assertEqual(samples[1, 0], -1)
+
+    def test_grassmannian(self):
+        self.setup()
+        samples = samply.subspace.grassmannian(10, 3, 2)
+
+        for basis in samples:
+            zero = math.fabs(basis[:, 0].dot(basis[:, 1]))
+            msg = "Basis is not orthogonal"
+            self.assertLessEqual(zero, 1e-15, msg)
 
 
 if __name__ == "__main__":
