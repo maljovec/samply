@@ -70,15 +70,6 @@ listed above. They include:
    (available for hypercube)
  *
 
-Including:
- * Uniform sampling of a n-dimensional ball
- * Uniform sampling of the directions on an n-dimensional sphere
- * Sampling the Grassmannian Atlas
- * An approximate Centroidal Voronoi Tessellation using a Probabilistic
-   Lloyd's Algorithm
- * An approximate Constrained Centroidal Voronoi Tessellation on an
-   n-sphere
-
 The python CVT code is adapted from a C++ implementation provided by
 Carlos Correa. The Grassmannian sampler is adapted from code from Shusen
 Liu.
@@ -113,19 +104,12 @@ You can use the library from python such as the examples below::
 
     import samply
 
-    sampler = samply.DirectionalSampler(2)
-    direction_samples = sampler.generate_samples(10000)
+    direction_samples = samply.directional.uniform(10000, 2)
+    ball_samples = samply.ball.uniform(10000, 2)
+    scvt_samples = samply.directional.cvt(10000, 2)
+    cvt_samples = samply.hypercube.cvt(10000, 2)
 
-    sampler = samply.BallSampler(2)
-    ball_samples = sampler.generate_samples(10000)
-
-    sampler = samply.DirectionalSampler(2)
-    directional_samples = sampler.generate_samples(10000)
-
-    sampler = samply.GrassmannianSampler(3, 2)
-    projection_samples = sampler.generate_samples(10)
-
-    cvt_samples = samply.CVTSampler.generate_samples(10, 2)
+    projection_samples = samply.subspace.grassmannian(10000, 3, 2)
 
 The ``*samples`` variables will be NxD matrices where N is the number of samples requested and D is the dimensionality of the sampler or the requested dimensionality.
 
@@ -149,8 +133,6 @@ What's Next
 ======
 
 Forthcoming:
- * A unified interface for Latin Hypercube sampling from PyDOE
- * A unified interface for Generalized Halton sequence sampling from ghalton
- * Improved documentation and a more uniform API
+ * Improved documentation
 
 .. end-todo
