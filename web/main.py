@@ -62,7 +62,7 @@ def makeData():
         elif s_type == "stripes":
             X = samply.shape.stripes(N, D)
         elif s_type == "distinct_mixture":
-            means = [0.25 * np.ones(D), 0.5 * np.ones(D), 0.75 * np.ones(D),]
+            means = [0.25 * np.ones(D), 0.5 * np.ones(D), 0.75 * np.ones(D)]
             covs = [0.00125 * np.eye(D)] * 3
             X = samply.hypercube.multimodal(N, D, means, covs)
         elif s_type == "overlap_mixture":
