@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>&beta;p-Skeleton</title>
+    <title>Samply Examply</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ url_for('static', filename='js/d3.min.js') }}" charset="utf-8"></script>
@@ -60,19 +60,10 @@
     </div>
 </body>
 <script type="text/javascript">
-    //Debugging features
-    var debug = true;
-    var maxP = 5;
-
     // User-specified values
-    var pNorm;
-    var beta;
-    var k;
     var numSamples = 100;
     var seed = 0;
     var strategy;
-    var graph;
-    var steps;
 
     //To be computed from the CSS after the html has been instantiated
     // For retrieving CSS values
@@ -82,40 +73,18 @@
     // more of an effect on this)
     var padding = 10;
 
-    // Size of the displayed
-    // neighborhoods
+    // Size of the displayed neighborhoods
     var graphSize;
 
     var canvas;
 
     // Data as flattened xy-array
     var points;
-    // Edges as flattened array
-    var edges;
-
-    function pointMouseOver(d) {
-        // console.log(this.id.toString());
-    }
-    function pointMouseOut(d) {
-        // console.log(this.id.toString());
-    }
 
     function updateData() {
         numSamples = Math.pow(10, parseInt(document.getElementById("count_slider").value));
         seed = parseInt(document.getElementById("seed_slider").value);
         strategy = document.getElementById('sampling_dropdown').value;
-        // graph = document.getElementById('graph_dropdown').value;
-        // k = parseInt(document.getElementById("k_slider").value) + 1;
-        // beta = parseFloat(document.getElementById("beta_slider").value);
-        // pNorm = parseFloat(document.getElementById("norm_slider").value);
-        // var discrete = document.getElementById("discrete_checkbox").checked;
-        // if (discrete) {
-        //     steps = parseInt(document.getElementById("steps_slider").value);
-        // }
-        // else {
-        //     steps = -1;
-        // }
-
 
         var data = { "count": numSamples, "seed": seed, "s_type": strategy };
 
@@ -174,8 +143,6 @@
                 .attr("cx", x)
                 .attr("cy", y)
                 .attr("id", "point_" + i.toString())
-                .on("mouseover", pointMouseOver)
-                .on("mouseout", pointMouseOut)
                 // .transition()
                 .attr("r", 4);
         }
