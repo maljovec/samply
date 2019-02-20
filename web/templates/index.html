@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>&beta;p-Skeleton</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='js/d3.min.js') }}" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/plots.js') }}" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+</head>
+
+<body>
+    <div id="controls">
+        <fieldset>
+            <legend>Sampling Parameters</legend>
+            <p>
+                <label for="sampling">Layout:</label>
+            </p>
+            <p>
+                <select name="sampling" id="sampling_dropdown" oninput="updateSampling()">
+                    <option value="uniform">Uniformly Distributed</option>
+                    <option value="grid">Grid</option>
+                    <option value="cvt">Centroidal Voronoi Tessellation</option>
+                    <option value="halton">Halton</option>
+                    <option value="lhs">Latin Hypercube Sampling</option>
+                    <option value="normal">Normally Distributed</option>
+                    <option value="shell">Annulus</option>
+                    <option value="dshell">Double Annulus</option>
+                    <option value="S">S-Shaped</option>
+                    <option value="x">X-Shaped</option>
+                    <option value="stripes">3 Stripes</option>
+                    <option value="distinct_mixture">3 Clusters</option>
+                    <option value="overlap_mixture">Overlapping Clusters</option>
+                </select>
+            </p>
+            <p>
+                <label for="count">Point Count:
+                    <span id='count'></span>
+                </label>
+            </p>
+            <p>
+                <input type="range" id="count_slider" name="count" min="1" max="3" value="2" oninput="updateCount()" />
+            </p>
+            <p>
+                <label for="p">Random Seed:
+                    <span class="text" id="seed"></span>
+                </label>
+            </p>
+            <p>
+                <input type="range" id="seed_slider" name="seed" min="0" max="2" value="0" oninput="updateSeed()" />
+            </p>
+            <p>Compute Time:
+                <span class="text" id="point_time"></span>
+            </p>
+        </fieldset>
+    </div>
+    <div id="graph">
+        <svg class="erg" id="ergCanvas"></svg>
+    </div>
+</body>
+<script type="text/javascript">
+    //Debugging features
+    var debug = true;
+    var maxP = 5;
+
+    // User-specified values
+    var pNorm;
+    var beta;
+    var k;
+    var numSamples = 100;
+    var seed = 0;
+    var strategy;
+    var graph;
+    var steps;
+
+    //To be computed from the CSS after the html has been instantiated
+    // For retrieving CSS values
+    var style;
+
+    // Shape above's padding (using a fixed value since stroke-width has
+    // more of an effect on this)
+    var padding = 10;
+
+    // Size of the displayed
+    // neighborhoods
+    var graphSize;
+
+    var canvas;
+
+    // Data as flattened xy-array
+    var points;
+    // Edges as flattened array
+    var edges;
+
+    function pointMouseOver(d) {
+        // console.log(this.id.toString());
+    }
+    function pointMouseOut(d) {
+        // console.log(this.id.toString());
+    }
+
+    function updateData() {
+        numSamples = Math.pow(10, parseInt(document.getElementById("count_slider").value));
+        seed = parseInt(document.getElementById("seed_slider").value);
+        strategy = document.getElementById('sampling_dropdown').value;
+        // graph = document.getElementById('graph_dropdown').value;
+        // k = parseInt(document.getElementById("k_slider").value) + 1;
+        // beta = parseFloat(document.getElementById("beta_slider").value);
+        // pNorm = parseFloat(document.getElementById("norm_slider").value);
+        // var discrete = document.getElementById("discrete_checkbox").checked;
+        // if (discrete) {
+        //     steps = parseInt(document.getElementById("steps_slider").value);
+        // }
+        // else {
+        //     steps = -1;
+        // }
+
+
+        var data = { "count": numSamples, "seed": seed, "s_type": strategy };
+
+        console.log('sending request to /sample');
+
+        canvas = d3.select("#ergCanvas");
+        d3.request("/sample")
+            .header("Content-Type", "application/json")
+            .post(JSON.stringify(data), function (error, data) {
+                if (error == null) {
+                    console.log('receiving response from /sample');
+                    var response = JSON.parse(data.response);
+                    var text = response.data;
+                    document.getElementById('point_time').innerText = response.time;
+                    text = text.replace(/\[|\]/gi, '').split(',');
+                    points = new Array(2 * numSamples);
+                    for (var i = 0; i < text.length; i++) {
+                        points[i] = parseFloat(text[i]);
+                    }
+                    plotPoints();
+                }
+                else {
+                    console.log(error);
+                }
+            });
+    }
+
+    function updateCount() {
+        var newValue = parseInt(document.getElementById("count_slider").value);
+        document.getElementById("count").innerHTML = Math.pow(10, newValue);
+        numSamples = Math.pow(10, newValue);
+        updateData();
+    }
+
+    function updateSampling() {
+        updateData();
+    }
+
+    function updateSeed() {
+        var newValue = parseInt(document.getElementById('seed_slider').value);
+        document.getElementById('seed').innerHTML = newValue;
+        updateData();
+    }
+
+    function plotPoints() {
+        canvas = d3.select("#ergCanvas");
+        canvas.selectAll('.point').remove();
+        var point_glyphs = canvas.append("g").attr("class", "point");
+        for (var i = 0; i < numSamples; i++) {
+            var x = points[2 * i] * graphSize;
+            var y = points[2 * i + 1] * graphSize;
+
+            point_glyphs.append("circle")
+                .attr("class", "point")
+                .attr("r", 1e-6)
+                .attr("cx", x)
+                .attr("cy", y)
+                .attr("id", "point_" + i.toString())
+                .on("mouseover", pointMouseOver)
+                .on("mouseout", pointMouseOut)
+                // .transition()
+                .attr("r", 4);
+        }
+    }
+</script>
+<script>
+    style = window.getComputedStyle(document.body);
+    graphSize = parseInt(style.getPropertyValue('--graphSize'));
+
+    var temp = parseInt(document.getElementById("count_slider").value);
+    numSamples = Math.pow(10, temp);
+    document.getElementById("count").innerHTML = numSamples;
+
+    seed = parseFloat(document.getElementById("seed_slider").value);
+    document.getElementById("seed").innerHTML = seed;
+
+    constructGrid(d3.select("#ergCanvas"), graphSize, graphSize);
+    updateCount();
+    updateData();
+</script>
+
+</html>
