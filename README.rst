@@ -24,9 +24,9 @@ samply
 
 .. logo
 
-.. image:: docs/_static/samply.svg
-    :align: center
-    :alt: samplers
+.. .. image:: docs/_static/samply.svg
+..    :align: center
+..    :alt: samplers
 
 .. end_logo
 
@@ -126,6 +126,14 @@ The test suite can be run through the setup script::
     python setup.py test
 
 .. end-testing
+
+.. example
+Example
+=====
+
+To test drive a subset of the different samplers in action, check out this little `web app <https://samply.appspot.com/>`_ hosted on the Google Cloud Platform which is using samply under the covers. Note, the CVT is still rather inefficient for larger sample sizes.
+
+.. end-example
 
 .. todo
 
