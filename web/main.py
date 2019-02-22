@@ -48,7 +48,7 @@ def makeData():
         elif s_type == "grid":
             X = samply.hypercube.grid(N, D)
         elif s_type == "cvt":
-            X = samply.hypercube.cvt(N, D)
+            X = samply.hypercube.cvt(N, D, 500000, 1e-3)
         elif s_type == "lhs":
             X = samply.hypercube.lhs(N, D)
         elif s_type == "shell":
