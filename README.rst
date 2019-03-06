@@ -26,7 +26,7 @@ samply
 
 .. .. image:: docs/_static/samply.svg
 ..    :align: center
-..    :alt: samplers
+..    :alt: samply
 
 .. end_logo
 
@@ -89,8 +89,8 @@ A preliminary version is available on PyPI::
 
 Otherwise, you can download the repository for the most cutting edge additions::
 
-    git clone https://github.com/maljovec/samplers.git
-    cd samplers
+    git clone https://github.com/maljovec/samply.git
+    cd samply
     python setup.py [build|develop|install]
 
 .. end-install
