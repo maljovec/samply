@@ -77,16 +77,16 @@ class TestHypercubeSampler(unittest.TestCase):
         self.assertGreaterEqual(np.min(samples), 0)
         self.assertLessEqual(np.max(samples), 1)
 
-    def test_halton(self):
-        """
-        """
-        self.setup()
-        np.random.seed(0)
-        samples = samply.hypercube.halton(10, 2)
-        self.assertEqual(10, samples.shape[0])
-        self.assertEqual(2, samples.shape[1])
-        self.assertGreaterEqual(np.min(samples), 0)
-        self.assertLessEqual(np.max(samples), 1)
+#    def test_halton(self):
+#        """
+#        """
+#        self.setup()
+#        np.random.seed(0)
+#        samples = samply.hypercube.halton(10, 2)
+#        self.assertEqual(10, samples.shape[0])
+#        self.assertEqual(2, samples.shape[1])
+#        self.assertGreaterEqual(np.min(samples), 0)
+#        self.assertLessEqual(np.max(samples), 1)
 
     def test_grid(self):
         """

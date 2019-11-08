@@ -71,7 +71,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
-    setup_requires=["scipy", "numpy", "sklearn", "pyDOE", "ghalton"],
-    install_requires=["scipy", "numpy", "sklearn", "pyDOE", "ghalton"],
+    setup_requires=["scipy", "numpy", "sklearn", "pyDOE"],
+    install_requires=["scipy", "numpy", "sklearn", "pyDOE"],
     python_requires=">=2.7, <4",
 )

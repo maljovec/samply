@@ -1,7 +1,7 @@
 from sklearn import neighbors
 import numpy as np
 import pyDOE
-import ghalton
+# import ghalton
 
 
 def uniform(count=1, dimensionality=2):
@@ -96,9 +96,9 @@ def lhs(count=1, dimensionality=2):
     return pyDOE.lhs(dimensionality, count)
 
 
-def halton(count=1, dimensionality=2, seed=0):
-    sequencer = ghalton.GeneralizedHalton(dimensionality, seed)
-    return np.array(sequencer.get(count))
+# def halton(count=1, dimensionality=2, seed=0):
+#     sequencer = ghalton.GeneralizedHalton(dimensionality, seed)
+#     return np.array(sequencer.get(count))
 
 
 # def distinct_mixture(count, dimensionality):
