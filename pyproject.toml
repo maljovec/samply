@@ -5,6 +5,9 @@ build-backend = "setuptools.build_meta"
 dependencies = [
     "scipy",
     "numpy",
+	"sklearn",
+	"pyDOE",
+	"ghalton"
 ]
 
 [project]
