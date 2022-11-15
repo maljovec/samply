@@ -1,25 +1,24 @@
 """ This module will test the functionality of samply.DirectionalSampler
 """
+import math
 import unittest
-import samply
+
+import numpy as np
 from scipy.stats import kstest, uniform
 from sklearn import neighbors
-import numpy as np
-import math
+
+import samply
 
 
 class TestDirectionalSampler(unittest.TestCase):
-    """ Class for testing the Directional sampler
-    """
+    """Class for testing the Directional sampler"""
 
     def setup(self):
-        """
-        """
+        """ """
         self.tolerance = 1e-1
 
     def test_1D_uniform(self):
-        """
-        """
+        """ """
         samples = samply.directional.uniform(10000, 1)
         msg = "There should only be 2 samples available for the 1D case."
         self.assertEqual(len(samples), 2, msg)
@@ -27,11 +26,10 @@ class TestDirectionalSampler(unittest.TestCase):
         self.assertEqual(samples[1, 0], 1)
 
     def test_2D_uniform(self):
-        """
-        """
+        """ """
         samples = samply.directional.uniform(10000, 2)
         norms = np.linalg.norm(samples, axis=1)
-        deltas = np.fabs(norms - 1.)
+        deltas = np.fabs(norms - 1.0)
         msg = "At least one sample does not represent a unit vector"
         self.assertLessEqual(np.max(deltas), 1e-6, msg)
 
@@ -39,14 +37,15 @@ class TestDirectionalSampler(unittest.TestCase):
         thetas /= 2 * math.pi
         thetas += 0.5
         p = kstest(thetas, uniform.cdf)[1]
-        msg = "The angles are not representative of a uniform distribution (p={})".format(
-            p
+        msg = (
+            "The angles are not representative of a uniform distribution (p={})".format(
+                p
+            )
         )
         self.assertGreaterEqual(p, 0.05, msg)
 
     def test_2D_cvt(self):
-        """
-        """
+        """ """
         self.setup()
         n_samples = 20
         n_validation = 100000
@@ -74,9 +73,7 @@ class TestDirectionalSampler(unittest.TestCase):
         # direction
         coms /= np.linalg.norm(coms, axis=1)[:, None]
         max_error = np.max(np.linalg.norm(points - coms, axis=1))
-        msg = "Error ({}) exceeds tolerance {}".format(
-            max_error, self.tolerance
-        )
+        msg = "Error ({}) exceeds tolerance {}".format(max_error, self.tolerance)
         self.assertLessEqual(max_error, self.tolerance, msg)
 
 

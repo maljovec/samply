@@ -1,24 +1,23 @@
 """ This module will test the functionality of samply.BallSampler
 """
-import unittest
-import samply
-from scipy.stats import kstest, uniform
-import numpy as np
 import math
+import unittest
+
+import numpy as np
+from scipy.stats import kstest, uniform
+
+import samply
 
 
 class TestBallSampler(unittest.TestCase):
-    """ Class for testing the Ball sampler
-    """
+    """Class for testing the Ball sampler"""
 
     def setup(self):
-        """
-        """
+        """ """
         self.tolerance = 1e-1
 
     def test_2D_uniform(self):
-        """
-        """
+        """ """
         np.random.seed(0)
         samples = samply.ball.uniform(10000, 2)
         norms = np.linalg.norm(samples, axis=1)
