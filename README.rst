@@ -1,6 +1,6 @@
-=====
+=======
 samply
-=====
+=======
 
 .. badges
 
@@ -119,7 +119,7 @@ The ``*samples`` variables will be NxD matrices where N is the number of samples
 .. testing
 
 Testing
-=====
+=======
 
 The test suite can be run through the setup script::
 
@@ -129,7 +129,7 @@ The test suite can be run through the setup script::
 
 .. example
 Example
-=====
+=======
 
 To test drive a subset of the different samplers in action, check out this little `web app <https://samply.appspot.com/>`_ hosted on the Google Cloud Platform which is using samply under the covers. Note, the CVT is still rather inefficient for larger sample sizes.
 
@@ -138,7 +138,7 @@ To test drive a subset of the different samplers in action, check out this littl
 .. todo
 
 What's Next
-======
+===========
 
 Forthcoming:
  * Improved documentation
