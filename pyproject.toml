@@ -12,7 +12,6 @@ classifiers = [
 	"Development Status :: 3 - Alpha",
 	"Intended Audience :: Science/Research",
 	"License :: OSI Approved :: BSD License",
-	"Programming Language :: C++",
 	"Programming Language :: Python :: 3",
 	"Topic :: Scientific/Engineering :: Mathematics",
 ]
@@ -21,7 +20,7 @@ dynamic = ["version", "description"]
 dependencies = [
     "scipy",
     "numpy",
-	"sklearn",
+	"scikit-learn",
 	"pyDOE",
 	"ghalton"
 ]
