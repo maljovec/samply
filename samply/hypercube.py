@@ -1,7 +1,7 @@
-from sklearn import neighbors
+import ghalton
 import numpy as np
 import pyDOE
-import ghalton
+from sklearn import neighbors
 
 
 def uniform(count=1, dimensionality=2):
@@ -9,7 +9,7 @@ def uniform(count=1, dimensionality=2):
 
 
 def grid(count=1, dimensionality=2):
-    numPoints = np.ceil(count ** (1. / dimensionality))
+    numPoints = np.ceil(count ** (1.0 / dimensionality)).astype("int")
     temp = np.meshgrid(
         *[np.linspace(0, 1, numPoints)[:] for i in range(dimensionality)]
     )
@@ -57,9 +57,7 @@ def cvt(
 
         if i % update_size == 0:
             nn.fit(points)
-            query_points = np.random.uniform(
-                0, 1, size=(update_size, dimensionality)
-            )
+            query_points = np.random.uniform(0, 1, size=(update_size, dimensionality))
             sites = nn.kneighbors(query_points, return_distance=False)
 
         ji[closest] = ji[closest] + 1
@@ -75,11 +73,9 @@ def cvt(
                 maxErrorId = closest
                 maxError = error[closest]
 
-            if maxError < epsilon ** 2:
+            if maxError < epsilon**2:
                 if verbose:
-                    print(
-                        "Converged at {} err = {}".format(i, np.sqrt(maxError))
-                    )
+                    print("Converged at {} err = {}".format(i, np.sqrt(maxError)))
                 break
 
     if verbose:
@@ -119,13 +115,12 @@ def halton(count=1, dimensionality=2, seed=0):
 
 
 def multimodal(count, dimensionality, means=None, covariances=None):
-    """
-    """
+    """ """
     if means is None:
         means = []
         means.append(0.5 * np.ones(dimensionality))
-        means.append(2. / 3. * np.ones(dimensionality))
-        means.append(1. / 3. * np.ones(dimensionality))
+        means.append(2.0 / 3.0 * np.ones(dimensionality))
+        means.append(1.0 / 3.0 * np.ones(dimensionality))
 
     if covariances is None:
         covariances = []

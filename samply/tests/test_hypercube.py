@@ -1,18 +1,18 @@
 """ This module will test the functionality of samply.BallSampler
 """
 import unittest
-import samply
-from sklearn import neighbors
+
 import numpy as np
+from sklearn import neighbors
+
+import samply
 
 
 class TestHypercubeSampler(unittest.TestCase):
-    """ Class for testing the Ball sampler
-    """
+    """Class for testing the Ball sampler"""
 
     def setup(self):
-        """
-        """
+        """ """
         self.tolerance = 1e-1
 
     def n_dimension_cvt_validation(self, n_samples, n_validation, D):
@@ -39,36 +39,31 @@ class TestHypercubeSampler(unittest.TestCase):
         )
 
     def test_cvt_verbosity(self):
-        """
-        """
+        """ """
         samples = samply.hypercube.cvt(10, 2, verbose=True)
         self.assertEqual(10, samples.shape[0])
         self.assertEqual(2, samples.shape[1])
 
     def test_2D_cvt_small(self):
-        """
-        """
+        """ """
         self.setup()
         np.random.seed(0)
         self.n_dimension_cvt_validation(10, 100000, 2)
 
     def test_2D_cvt_moderate(self):
-        """
-        """
+        """ """
         self.setup()
         np.random.seed(0)
         self.n_dimension_cvt_validation(1000, 100000, 2)
 
     def test_3D_cvt_moderate(self):
-        """
-        """
+        """ """
         self.setup()
         np.random.seed(0)
         self.n_dimension_cvt_validation(1000, 100000, 3)
 
     def test_lhs(self):
-        """
-        """
+        """ """
         self.setup()
         np.random.seed(0)
         samples = samply.hypercube.lhs(10, 2)
@@ -78,8 +73,7 @@ class TestHypercubeSampler(unittest.TestCase):
         self.assertLessEqual(np.max(samples), 1)
 
     def test_halton(self):
-        """
-        """
+        """ """
         self.setup()
         np.random.seed(0)
         samples = samply.hypercube.halton(10, 2)
@@ -89,23 +83,21 @@ class TestHypercubeSampler(unittest.TestCase):
         self.assertLessEqual(np.max(samples), 1)
 
     def test_grid(self):
-        """
-        """
+        """ """
         self.setup()
         D = 2
-        N = 10 ** D
+        N = 10**D
         samples = samply.hypercube.grid(N, D)
         self.assertEqual(N, samples.shape[0])
         self.assertEqual(D, samples.shape[1])
         for i in range(D):
-            self.assertEqual(samples[0, i], 0.)
-            self.assertEqual(samples[-1, i], 1.)
+            self.assertEqual(samples[0, i], 0.0)
+            self.assertEqual(samples[-1, i], 1.0)
         self.assertGreaterEqual(np.min(samples), 0)
         self.assertLessEqual(np.max(samples), 1)
 
     def test_normal(self):
-        """
-        """
+        """ """
         self.setup()
         N = 100000
         D = 2
@@ -122,8 +114,7 @@ class TestHypercubeSampler(unittest.TestCase):
             self.assertLessEqual(sigma, 1e-3)
 
     def test_multimodal(self):
-        """
-        """
+        """ """
         self.setup()
         np.random.seed(0)
         samples = samply.hypercube.multimodal(10, 2)

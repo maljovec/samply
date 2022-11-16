@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn import neighbors
 
+
 def uniform(count=1, dimensionality=2):
     if dimensionality == 1:
         return np.array([[-1], [1]])
@@ -14,12 +15,14 @@ def uniform(count=1, dimensionality=2):
     return samples
 
 
-def cvt(count=1, dimensionality=2,
-        max_iterations=1000000,
-        epsilon=1e-6,
-        verbose=False,
-        update_size=10000,
-    ):
+def cvt(
+    count=1,
+    dimensionality=2,
+    max_iterations=1000000,
+    epsilon=1e-6,
+    verbose=False,
+    update_size=10000,
+):
     points = uniform(count, dimensionality)
     nn = neighbors.NearestNeighbors(n_neighbors=1)
     nn.fit(points)
@@ -61,13 +64,9 @@ def cvt(count=1, dimensionality=2,
                 maxErrorId = closest
                 maxError = error[closest]
 
-            if maxError < epsilon ** 2:
+            if maxError < epsilon**2:
                 if verbose:
-                    print(
-                        "Converged at {} err = {}".format(
-                            i, np.sqrt(maxError)
-                        )
-                    )
+                    print("Converged at {} err = {}".format(i, np.sqrt(maxError)))
                 break
 
     if verbose:

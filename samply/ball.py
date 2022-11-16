@@ -9,4 +9,3 @@ def uniform(count=1, dimensionality=2):
         samples[i, :] = X[0:dimensionality]
 
     return samples
-

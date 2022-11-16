@@ -1,22 +1,22 @@
 """ This module will test the functionality of samply.SubspaceSampler
 """
-import unittest
-import samply
-import numpy as np
 import math
+import unittest
+
+import numpy as np
+
+import samply
+
 
 class TestSubspaceSampler(unittest.TestCase):
-    """ Class for testing the Subspace sampler
-    """
+    """Class for testing the Subspace sampler"""
 
     def setup(self):
-        """
-        """
+        """ """
         pass
 
     def test_invalid(self):
-        """
-        """
+        """ """
         try:
             samply.subspace.orthogonal_ball([1], 1)
             self.assertEqual(True, False, "A ValueError should be raised.")
@@ -24,8 +24,7 @@ class TestSubspaceSampler(unittest.TestCase):
             self.assertEqual("Could not construct valid subspace.", str(err))
 
     def test_2D_x(self):
-        """
-        """
+        """ """
         samples = samply.subspace.orthogonal_ball([1, 0], 1000)
         zero = np.unique(samples[:, 0])
         msg = "Samples drawn orthogonal to x-axis should have x=0"
@@ -41,8 +40,7 @@ class TestSubspaceSampler(unittest.TestCase):
         self.assertEqual(samples[1, 1], 1)
 
     def test_2D_y(self):
-        """
-        """
+        """ """
         samples = samply.subspace.orthogonal_directional([0, 1], 1000)
         zero = np.unique(samples[:, 1])
         msg = "Samples drawn orthogonal to y-axis should have y=0"

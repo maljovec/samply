@@ -1,14 +1,15 @@
 import numpy as np
+
 from samply import ball, directional
 
 
 def orthogonalize(vectors):
     """
-        This is a more stable version of the gram_schmidt function that
-        instead uses the QR factorization to construct a set of
-        orthonormal vectors where the first row is the same as that
-        given by the first row of the input vectors. Thus, the remaining
-        rows define a subspace that is orthogonal to the desired vector.
+    This is a more stable version of the gram_schmidt function that
+    instead uses the QR factorization to construct a set of
+    orthonormal vectors where the first row is the same as that
+    given by the first row of the input vectors. Thus, the remaining
+    rows define a subspace that is orthogonal to the desired vector.
     """
     A = np.array(vectors).T
     Q, R = np.linalg.qr(A)
@@ -16,8 +17,7 @@ def orthogonalize(vectors):
 
 
 def grassmannian(count=1, data_dimensionality=2, target_dimensionality=2):
-    """
-    """
+    """ """
     basis = np.zeros((data_dimensionality, target_dimensionality))
     basis[0, 0] = 1
     basis[1, 1] = 1
@@ -44,8 +44,7 @@ def grassmannian(count=1, data_dimensionality=2, target_dimensionality=2):
 
 
 def orthogonal_ball(vector, count=1):
-    """
-    """
+    """ """
     dimensionality = len(vector)
     subspace_basis = []
 
@@ -74,8 +73,7 @@ def orthogonal_ball(vector, count=1):
 
 
 def orthogonal_directional(vector, count=1):
-    """
-    """
+    """ """
     dimensionality = len(vector)
     subspace_basis = []
 
@@ -101,4 +99,3 @@ def orthogonal_directional(vector, count=1):
         samples[i, :] = np.dot(Xi, subspace_basis)
 
     return samples
-
