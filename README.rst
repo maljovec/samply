@@ -137,6 +137,7 @@ The test suite can be run through the setup script::
 .. end-testing
 
 .. example
+
 Example
 =======
 
