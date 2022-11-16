@@ -2,14 +2,6 @@
 requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
 
-dependencies = [
-    "scipy",
-    "numpy",
-	"sklearn",
-	"pyDOE",
-	"ghalton"
-]
-
 [project]
 name = "samply"
 authors = [
@@ -26,6 +18,13 @@ classifiers = [
 ]
 requires-python = ">=3.7"
 dynamic = ["version", "description"]
+dependencies = [
+    "scipy",
+    "numpy",
+	"sklearn",
+	"pyDOE",
+	"ghalton"
+]
 
 [project.urls]
 Documentation = "https://samply.readthedocs.io/en/latest/"
