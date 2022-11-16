@@ -9,7 +9,7 @@ def uniform(count=1, dimensionality=2):
 
 
 def grid(count=1, dimensionality=2):
-    numPoints = np.ceil(count ** (1.0 / dimensionality))
+    numPoints = np.ceil(count ** (1.0 / dimensionality)).astype("int")
     temp = np.meshgrid(
         *[np.linspace(0, 1, numPoints)[:] for i in range(dimensionality)]
     )
