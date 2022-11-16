@@ -36,7 +36,7 @@ jobs:
       - run: pip install coverage
       - run: |
           coverage combine coverage*/
-          coverage report --fail-under=0
+          coverage report --fail-under=95
           coverage lcov
       - name: publish coverage to Coveralls
         uses: coverallsapp/github-action@master
