@@ -1,9 +1,11 @@
 [run]
 branch = True
+omit =
+    samply/tests/*
+
+[paths]
 source =
     samply/
     /Users/runner/work/samply/samply/samply/
     /home/runner/work/samply/samply/samply/
     D:\a\samply\samply\samply\
-omit =
-    samply/tests/*
