@@ -22,7 +22,7 @@ dependencies = [
     "numpy",
 	"scikit-learn",
 	"pyDOE",
-	"ghalton"
+	"ghalton<0.6.2"
 ]
 
 [project.urls]
