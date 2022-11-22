@@ -21,8 +21,8 @@ samply
 .. image:: https://www.codefactor.io/repository/github/maljovec/samply/badge
         :target: https://www.codefactor.io/repository/github/maljovec/samply
         :alt: CodeFactor
-.. image:: https://coveralls.io/repos/github/maljovec/samply/badge.svg?branch=master
-        :target: https://coveralls.io/github/maljovec/samply?branch=master
+.. image:: https://coveralls.io/repos/github/maljovec/samply/badge.svg?branch=main
+        :target: https://coveralls.io/github/maljovec/samply?branch=main
         :alt: Coveralls
 .. image:: https://readthedocs.org/projects/samply/badge/?version=latest
         :target: https://samply.readthedocs.io/en/latest/?badge=latest
