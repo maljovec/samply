@@ -1,5 +1,6 @@
 """ This module will test the functionality of samply.BallSampler
 """
+
 import math
 import unittest
 

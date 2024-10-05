@@ -1,6 +1,7 @@
 """
       Setup script for samply
 """
+
 from setuptools import setup
 
 
